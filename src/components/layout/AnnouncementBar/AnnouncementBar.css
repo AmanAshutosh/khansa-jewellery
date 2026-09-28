@@ -1,0 +1,28 @@
+.announcement {
+  position: relative;
+  z-index: 41;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--announce-h);
+  padding: 8px var(--gutter);
+  background: var(--c-sand);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.announcement__text {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--c-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 420px) {
+  .announcement__text {
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+  }
+}

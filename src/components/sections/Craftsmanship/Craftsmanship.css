@@ -1,0 +1,140 @@
+.craft {
+  background: var(--c-sand);
+  overflow: hidden;
+}
+
+.craft__grid {
+  display: grid;
+  gap: clamp(56px, 7vw, 120px);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .craft__grid {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+
+/* ---------- Layered imagery ---------- */
+.craft__visual {
+  position: relative;
+  padding-bottom: 16%;
+  padding-right: 14%;
+}
+
+.craft__primary {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.craft__detail {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 44%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  outline: clamp(6px, 0.8vw, 12px) solid var(--c-sand);
+}
+
+.craft__img {
+  position: absolute !important;
+  inset: 0;
+  backface-visibility: hidden;
+  transition:
+    transform var(--hover-dur) var(--ease-lux),
+    filter var(--hover-fade) ease;
+}
+
+/* The wrappers' own transform belongs to Reveal, so only the image moves */
+@media (hover: hover) {
+  .craft__primary:hover .craft__img,
+  .craft__detail:hover .craft__img {
+    filter: var(--hover-filter);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .craft__primary:hover .craft__img,
+  .craft__detail:hover .craft__img {
+    transform: scale(var(--hover-scale));
+  }
+}
+
+/* ---------- Copy ---------- */
+.craft__copy {
+  max-width: 580px;
+}
+
+.craft__title {
+  margin-top: 20px;
+  font-family: var(--f-serif);
+  font-weight: 300;
+  font-size: clamp(38px, 4.6vw, 68px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.craft__quote {
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  padding-left: 22px;
+  border-left: 1px solid var(--c-gold);
+}
+
+.craft__quote p {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.35;
+  color: var(--c-ink);
+}
+
+.craft__text {
+  margin-top: 24px;
+  max-width: 44ch;
+  font-size: 15px;
+  color: var(--c-muted);
+}
+
+.craft__steps {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--c-line);
+}
+
+.craft__steps li {
+  display: grid;
+  gap: 6px;
+  padding: 18px 12px 0 0;
+}
+
+.craft__step-n {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--c-gold);
+}
+
+.craft__step-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.craft__cta {
+  margin-top: 40px;
+}
+
+@media (max-width: 1023px) {
+  .craft__visual {
+    max-width: 620px;
+  }
+}

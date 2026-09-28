@@ -1,0 +1,112 @@
+.social__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 10px;
+}
+
+.social__item {
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+.social__link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  color: var(--c-ivory);
+  aspect-ratio: 4 / 5;
+}
+
+.social__item--square .social__link { aspect-ratio: 1 / 1; }
+.social__item--tall .social__link { aspect-ratio: 3 / 4.4; }
+
+.social__img {
+  position: absolute !important;
+  inset: 0;
+  backface-visibility: hidden;
+  transition:
+    transform var(--hover-dur) var(--ease-lux),
+    filter var(--hover-fade) ease;
+}
+
+.social__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(37, 35, 31, 0.32);
+  opacity: 0;
+  transition: opacity 600ms var(--ease-lux);
+}
+
+.social__view {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transform: translateY(6px);
+  transition: transform 600ms var(--ease-lux);
+}
+
+/* Always-visible cue for touch screens */
+.social__badge {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(248, 246, 241, 0.85);
+  color: var(--c-ink);
+  transition: opacity 400ms var(--ease-lux);
+}
+
+@media (hover: hover) {
+  .social__badge {
+    opacity: 0;
+  }
+
+  .social__link:hover .social__img {
+    filter: var(--hover-filter);
+  }
+
+  .social__link:hover .social__overlay,
+  .social__link:focus-visible .social__overlay {
+    opacity: 1;
+  }
+
+  .social__link:hover .social__view {
+    transform: translateY(0);
+  }
+}
+
+/* No card lift here: transforms inside a multi-column layout clip and flicker */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .social__link:hover .social__img {
+    transform: scale(var(--hover-scale));
+  }
+}
+
+@media (min-width: 768px) {
+  .social__grid {
+    columns: 3;
+    column-gap: 16px;
+  }
+
+  .social__item {
+    margin-bottom: 16px;
+  }
+}
+
+.social__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(40px, 5vw, 64px);
+}

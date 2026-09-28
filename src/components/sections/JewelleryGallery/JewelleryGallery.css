@@ -1,0 +1,207 @@
+.jgallery__tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: clamp(8px, 3vw, 48px);
+  margin-bottom: clamp(36px, 4.5vw, 64px);
+  border-bottom: 1px solid var(--c-line-soft);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.jgallery__tab:first-child {
+  margin-left: auto; /* centres the row without clipping when it overflows */
+}
+
+.jgallery__tab:last-child {
+  margin-right: auto;
+}
+
+@media (max-width: 480px) {
+  .jgallery__tabs {
+    gap: 0;
+  }
+
+  .jgallery__tab {
+    padding: 0 6px;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+  }
+}
+
+.jgallery__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.jgallery__tab {
+  position: relative;
+  flex-shrink: 0;
+  min-height: 48px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  cursor: pointer;
+  transition: color var(--dur-med) var(--ease-lux);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.jgallery__tab.is-active {
+  color: var(--c-ink);
+}
+
+@media (hover: hover) {
+  .jgallery__tab:hover {
+    color: var(--c-ink);
+  }
+}
+
+.jgallery__underline {
+  position: absolute;
+  left: 10px;
+  right: calc(10px + 0.24em);
+}
+
+@media (max-width: 480px) {
+  .jgallery__underline {
+    left: 6px;
+    right: calc(6px + 0.18em);
+  }
+  bottom: -1px;
+  height: 1px;
+  background: var(--c-gold);
+}
+
+.jgallery__panel {
+  min-height: 200px;
+}
+
+/* ---------- Editorial grid ---------- */
+.jgallery__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 12px;
+}
+
+.jgallery__cell {
+  min-width: 0;
+}
+
+.jgallery__cell--1 {
+  grid-column: span 2;
+}
+
+.jgallery__figure {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.jgallery__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  transition:
+    transform var(--hover-dur) var(--ease-lux),
+    box-shadow var(--hover-dur) var(--ease-lux);
+}
+
+.jgallery__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--hover-sheen);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--hover-fade) ease;
+}
+
+.jgallery__cell--1 .jgallery__media {
+  aspect-ratio: 4 / 3;
+}
+
+.jgallery__img {
+  position: absolute !important;
+  inset: 0;
+  backface-visibility: hidden;
+  transition:
+    transform var(--hover-dur) var(--ease-lux),
+    filter var(--hover-fade) ease;
+}
+
+.jgallery__caption {
+  padding-top: 14px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(17px, 1.5vw, 21px);
+  color: var(--c-ink);
+  transition: transform var(--hover-dur) var(--ease-lux);
+}
+
+@media (hover: hover) {
+  .jgallery__figure:hover .jgallery__img {
+    filter: var(--hover-filter);
+  }
+
+  .jgallery__figure:hover .jgallery__media::after {
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .jgallery__figure:hover .jgallery__media {
+    transform: translateY(var(--hover-lift));
+    box-shadow: var(--hover-shadow);
+  }
+
+  .jgallery__figure:hover .jgallery__img {
+    transform: scale(var(--hover-scale));
+  }
+
+  .jgallery__figure:hover .jgallery__caption {
+    transform: translateY(var(--hover-text-lift));
+  }
+}
+
+@media (min-width: 1024px) {
+  .jgallery__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 44px 20px;
+    grid-template-areas:
+      'a a a a a a b b b c c c'
+      'a a a a a a d d d e e e';
+  }
+
+  .jgallery__cell--1 { grid-column: auto; grid-area: a; }
+  .jgallery__cell--2 { grid-area: b; }
+  .jgallery__cell--3 { grid-area: c; }
+  .jgallery__cell--4 { grid-area: d; }
+  .jgallery__cell--5 { grid-area: e; }
+
+  .jgallery__cell--1 .jgallery__media {
+    aspect-ratio: auto;
+    flex: 1;
+  }
+
+  /* Offset the right-most column for an editorial rhythm */
+  .jgallery__cell--3,
+  .jgallery__cell--5 {
+    transform: translateY(40px);
+  }
+}
+
+@media (max-width: 400px) {
+  .jgallery__tab {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+}

@@ -1,0 +1,189 @@
+.bento__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* Mobile: 2 columns, the lead category runs full width */
+.bento__cell {
+  aspect-ratio: 4 / 5;
+  min-width: 0;
+}
+
+.bento__cell--earrings {
+  grid-column: span 2;
+  aspect-ratio: 5 / 4;
+}
+
+.bento__cell--necklaces {
+  grid-column: span 2;
+  aspect-ratio: 16 / 10;
+}
+
+/* Tablet: 4 columns with a couple of feature tiles */
+@media (min-width: 700px) {
+  .bento__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .bento__cell {
+    aspect-ratio: 3 / 4;
+  }
+
+  .bento__cell--earrings {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+
+  .bento__cell--necklaces {
+    grid-column: span 2;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* Desktop: asymmetric 12-column editorial bento */
+@media (min-width: 1024px) {
+  .bento__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(3, clamp(230px, 22vw, 330px));
+    grid-template-areas:
+      'earrings earrings earrings earrings earrings rings rings rings necklaces necklaces necklaces necklaces'
+      'earrings earrings earrings earrings earrings pendants pendants pendants necklaces necklaces necklaces necklaces'
+      'mangalsutra mangalsutra mangalsutra mangalsutra bracelets bracelets bracelets bangles bangles bangles chains chains';
+    gap: 16px;
+  }
+
+  .bento__cell,
+  .bento__cell--earrings,
+  .bento__cell--necklaces,
+  .bento__cell--mangalsutra {
+    aspect-ratio: auto;
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .bento__cell--earrings { grid-area: earrings; }
+  .bento__cell--rings { grid-area: rings; }
+  .bento__cell--pendants { grid-area: pendants; }
+  .bento__cell--necklaces { grid-area: necklaces; }
+  .bento__cell--mangalsutra { grid-area: mangalsutra; }
+  .bento__cell--bracelets { grid-area: bracelets; }
+  .bento__cell--bangles { grid-area: bangles; }
+  .bento__cell--chains { grid-area: chains; }
+}
+
+/* ---------- Card ---------- */
+.bento__card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--c-ivory);
+  text-decoration: none;
+  isolation: isolate;
+  transition:
+    transform var(--hover-dur) var(--ease-lux),
+    box-shadow var(--hover-dur) var(--ease-lux);
+}
+
+.bento__img {
+  position: absolute !important;
+  inset: 0;
+  backface-visibility: hidden;
+  transition:
+    transform var(--hover-dur) var(--ease-lux),
+    filter var(--hover-fade) ease;
+}
+
+.bento__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(22, 19, 15, 0.46) 0%, rgba(22, 19, 15, 0.08) 42%, rgba(22, 19, 15, 0) 60%);
+  transition: background-color var(--hover-dur) var(--ease-lux);
+}
+
+.bento__label {
+  position: absolute;
+  left: clamp(16px, 2.2vw, 32px);
+  right: clamp(16px, 2.2vw, 32px);
+  bottom: clamp(16px, 2.2vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform var(--hover-dur) var(--ease-lux);
+}
+
+.bento__name {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 34px);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.bento__cell--earrings .bento__name {
+  font-size: clamp(28px, 3.2vw, 48px);
+}
+
+.bento__explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.bento__arrow {
+  transition: transform var(--hover-dur) var(--ease-lux);
+}
+
+/* Hover is read on the cell (whose transform belongs to Reveal) so the lifted
+   card never slips out from under the pointer. */
+@media (hover: hover) {
+  .bento__cell:hover .bento__img {
+    filter: var(--hover-filter);
+  }
+
+  .bento__cell:hover .bento__shade {
+    background-color: rgba(22, 19, 15, 0.1);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .bento__cell:hover .bento__card {
+    transform: translateY(var(--hover-lift));
+    box-shadow: var(--hover-shadow);
+  }
+
+  .bento__cell:hover .bento__img {
+    transform: scale(var(--hover-scale));
+  }
+
+  .bento__cell:hover .bento__label {
+    transform: translateY(var(--hover-text-lift));
+  }
+
+  .bento__cell:hover .bento__arrow {
+    transform: translateX(var(--hover-nudge));
+  }
+}
+
+.bento__card:focus-visible {
+  outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+  .bento__explore {
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+  }
+}

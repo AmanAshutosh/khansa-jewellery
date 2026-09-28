@@ -1,0 +1,194 @@
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--c-white);
+  transition:
+    transform var(--hover-dur) var(--ease-lux),
+    box-shadow var(--hover-dur) var(--ease-lux);
+}
+
+/* Soft studio-light wash that fades in on hover */
+.product-card__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--hover-sheen);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--hover-fade) ease;
+}
+
+.product-card__img {
+  position: absolute !important;
+  inset: 0;
+  backface-visibility: hidden;
+  transition:
+    opacity var(--dur-med) var(--ease-lux),
+    transform var(--hover-dur) var(--ease-lux),
+    filter var(--hover-fade) ease;
+}
+
+.product-card__img--hover {
+  opacity: 0;
+}
+
+.product-card__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 5px 10px 4px;
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  background: rgba(248, 246, 241, 0.92);
+}
+
+.product-card__wish {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 3; /* above the stretched link */
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-lux), transform var(--dur-fast) var(--ease-lux);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.product-card__wish.is-active {
+  color: var(--c-gold);
+}
+
+.product-card__wish:active {
+  transform: scale(0.92);
+}
+
+.product-card__info {
+  padding-top: 18px;
+  display: grid;
+  gap: 4px;
+  transition: transform var(--hover-dur) var(--ease-lux);
+}
+
+.product-card__category {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.product-card__name {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.product-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Stretched link: the whole card is clickable, the wishlist button stays separate. */
+.product-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.product-card__link:focus-visible {
+  outline: none;
+}
+
+.product-card__link:focus-visible::after {
+  outline: 1.5px solid var(--c-gold);
+  outline-offset: 4px;
+}
+
+.product-card__metal {
+  font-size: 12.5px;
+  color: var(--c-muted);
+}
+
+.product-card__price {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* Crossfade image → hoverImage. Hover is read on the card, while only inner
+   parts move, so the pointer never "falls off" the lifted edge. */
+@media (hover: hover) {
+  .product-card:hover .product-card__img--front {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-card__img--hover {
+    opacity: 1;
+  }
+
+  .product-card:hover .product-card__img {
+    filter: var(--hover-filter);
+  }
+
+  .product-card:hover .product-card__media::after {
+    opacity: 1;
+  }
+
+  .product-card__wish:hover {
+    color: var(--c-gold);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .product-card:hover .product-card__media {
+    transform: translateY(var(--hover-lift));
+    box-shadow: var(--hover-shadow);
+  }
+
+  .product-card:hover .product-card__img {
+    transform: scale(var(--hover-scale));
+  }
+
+  .product-card:hover .product-card__info {
+    transform: translateY(var(--hover-text-lift));
+  }
+}
+
+/* Reduced motion: nothing moves, but the swap stays a gentle fade, not a cut */
+@media (prefers-reduced-motion: reduce) {
+  .product-card__img {
+    transition: opacity 400ms ease !important;
+  }
+}
+
+@media (max-width: 599px) {
+  .product-card__info {
+    padding-top: 14px;
+  }
+
+  .product-card__metal {
+    display: none;
+  }
+}

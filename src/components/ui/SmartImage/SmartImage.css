@@ -1,0 +1,60 @@
+.smart-image {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: var(--tone-base, var(--c-sand));
+
+  /* Muted, photographic placeholder tones */
+  --tone-base: #e6ded0;
+  --tone-light: #f1ece3;
+  --tone-ink: rgba(184, 149, 85, 0.75);
+}
+
+.smart-image[data-tone='ivory'] { --tone-base: #e9e3d8; --tone-light: #f5f1ea; --tone-ink: rgba(184, 149, 85, 0.7); }
+.smart-image[data-tone='sand']  { --tone-base: #e2d8c7; --tone-light: #f1ebe1; --tone-ink: rgba(160, 125, 66, 0.7); }
+.smart-image[data-tone='blush'] { --tone-base: #d4bcae; --tone-light: #e8d9cf; --tone-ink: rgba(255, 251, 244, 0.85); }
+.smart-image[data-tone='sage']  { --tone-base: #afb3a0; --tone-light: #cfd1c2; --tone-ink: rgba(255, 251, 244, 0.85); }
+.smart-image[data-tone='stone'] { --tone-base: #b5ab9d; --tone-light: #d5cdc1; --tone-ink: rgba(255, 251, 244, 0.85); }
+.smart-image[data-tone='clay']  { --tone-base: #ad8770; --tone-light: #cfae97; --tone-ink: rgba(248, 236, 208, 0.85); }
+.smart-image[data-tone='mocha'] { --tone-base: #7f6856; --tone-light: #a48b74; --tone-ink: rgba(216, 193, 141, 0.9); }
+.smart-image[data-tone='dusk']  { --tone-base: #635b54; --tone-light: #8a8177; --tone-ink: rgba(216, 193, 141, 0.9); }
+
+.smart-image__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.smart-image__placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--tone-ink);
+  background:
+    radial-gradient(120% 90% at 22% 12%, var(--tone-light) 0%, transparent 60%),
+    linear-gradient(165deg, var(--tone-light) 0%, var(--tone-base) 70%);
+}
+
+/* A whisper of studio light */
+.smart-image__placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 50% at 50% 55%, rgba(255, 255, 255, 0.14), transparent 70%);
+  pointer-events: none;
+}
+
+.smart-image__motif {
+  width: clamp(64px, 34%, 200px);
+  height: auto;
+  overflow: visible;
+}
+
+.smart-image__motif * {
+  vector-effect: non-scaling-stroke;
+}

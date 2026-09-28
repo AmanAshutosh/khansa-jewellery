@@ -1,0 +1,95 @@
+.assurance__head {
+  text-align: center;
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+
+.assurance__title {
+  margin-top: 18px;
+  font-family: var(--f-serif);
+  font-weight: 300;
+  font-size: clamp(32px, 4.4vw, 60px);
+  line-height: 1.08;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.assurance__title em {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  color: var(--c-muted);
+}
+
+.assurance__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--c-line);
+}
+
+.assurance__pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 14px;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.assurance__pillar:nth-child(odd) {
+  border-right: 1px solid var(--c-line);
+}
+
+.assurance__icon {
+  color: var(--c-gold);
+}
+
+.assurance__pillar-title {
+  margin-top: 22px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.assurance__copy {
+  margin-top: 12px;
+  max-width: 24ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--c-muted);
+}
+
+@media (min-width: 1024px) {
+  .assurance__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 0;
+  }
+
+  .assurance__pillar {
+    padding: 12px clamp(20px, 2.5vw, 40px);
+    border-bottom: 0;
+    border-right: 1px solid var(--c-line);
+  }
+
+  .assurance__pillar:last-child {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .assurance__pillar {
+    padding: 32px 10px;
+  }
+
+  .assurance__pillar-title {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+  }
+
+  .assurance__copy {
+    font-size: 13px;
+  }
+}

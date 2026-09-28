@@ -1,0 +1,99 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 0 30px;
+  font-family: var(--f-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-med) var(--ease-lux),
+    color var(--dur-med) var(--ease-lux),
+    border-color var(--dur-med) var(--ease-lux);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn__arrow {
+  transition: transform var(--dur-med) var(--ease-lux);
+}
+
+.btn--solid {
+  background: var(--c-ink);
+  color: var(--c-ivory);
+}
+
+.btn--outline {
+  border-color: rgba(37, 35, 31, 0.35);
+  color: var(--c-ink);
+}
+
+/* For use over imagery */
+.btn--light {
+  border-color: rgba(248, 246, 241, 0.7);
+  color: var(--c-ivory);
+  background: rgba(248, 246, 241, 0.02);
+  backdrop-filter: blur(2px);
+}
+
+.btn--link {
+  min-height: 44px;
+  padding: 0;
+  gap: 10px;
+  color: var(--c-ink);
+  border: 0;
+}
+
+.btn--link .btn__label {
+  position: relative;
+  padding-block: 4px;
+}
+
+.btn--link .btn__label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+  transform-origin: left;
+  transition:
+    opacity var(--dur-med) var(--ease-lux),
+    background-color var(--dur-med) var(--ease-lux);
+}
+
+@media (hover: hover) {
+  .btn:hover .btn__arrow {
+    transform: translateX(4px);
+  }
+
+  .btn--solid:hover {
+    background: #3a3730;
+  }
+
+  .btn--outline:hover {
+    border-color: var(--c-ink);
+    background: var(--c-ink);
+    color: var(--c-ivory);
+  }
+
+  .btn--light:hover {
+    background: var(--c-ivory);
+    color: var(--c-ink);
+    border-color: var(--c-ivory);
+  }
+
+  .btn--link:hover .btn__label::after {
+    opacity: 1;
+    background: var(--c-gold);
+  }
+}

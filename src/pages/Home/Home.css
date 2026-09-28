@@ -1,0 +1,14 @@
+.home {
+  position: relative;
+}
+
+/* Hairline between the two consecutive ivory sections */
+.home > .jgallery,
+.home > .social {
+  border-top: 1px solid var(--c-line-soft);
+}
+
+/* In-page anchors land below the sticky header */
+.home section[id] {
+  scroll-margin-top: var(--header-h);
+}

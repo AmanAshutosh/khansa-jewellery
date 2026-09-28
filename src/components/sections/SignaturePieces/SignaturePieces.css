@@ -1,0 +1,30 @@
+.signature__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px 12px;
+}
+
+.signature__item {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .signature__grid {
+    gap: 48px 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signature__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  /* Gentle editorial rhythm: even cards sit a touch lower */
+  .signature__item:nth-child(even) {
+    margin-top: 48px;
+  }
+}

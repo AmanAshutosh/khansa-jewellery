@@ -1,4 +1,4 @@
-# Khansa — Premium Jewellery Website (V1)
+# Khansa —  Jewellery Website (V1)
 
 Modern Indian jewellery house × quiet luxury × editorial e-commerce.
 
